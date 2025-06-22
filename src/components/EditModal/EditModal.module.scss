@@ -1,0 +1,69 @@
+.container {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--main-color);
+    opacity: 0.7;
+  }
+}
+
+.modal {
+  position: absolute;
+  padding: 18px 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  background-color: var(--bg-color);
+  border-radius: 16px;
+  color: var(--main-color);
+  text-align: center;
+
+  &_title {
+    text-transform: uppercase;
+    padding-block-end: 25px;
+  }
+
+  &_button_section {
+    display: flex;
+    justify-content: space-between;
+    gap: 226px;
+  }
+}
+
+.modal_button_section .cansel_button {
+  &:hover {
+    filter: brightness(70%);
+  }
+}
+
+.modal_button_section  .submit_button {
+  background-color: var(--button-bg-color);
+  color: var(--button-color);
+
+  &:hover {
+    background-color: var(--button-hover-color);
+  }
+}
+
+.edit__form {
+  padding-block-end: 128px;
+
+  &_input {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    width: 100%;
+    outline: none;
+  }
+}
+
+.not_active {
+  opacity: 0.7;
+  pointer-events: none;
+}

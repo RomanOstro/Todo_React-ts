@@ -1,0 +1,13 @@
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 750px;
+  text-align: center;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.title {
+  padding-block: 48px 18px;
+}

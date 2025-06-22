@@ -1,0 +1,13 @@
+.button {
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  color: var(--border-color);
+  width: fit-content;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 10px 22px;
+  text-transform: uppercase;
+  cursor: var(--cursor-pointer);
+
+}
