@@ -4,20 +4,22 @@ import type { IToDo } from '../../types/types'
 
 interface INoteSection {
   data: IToDo[]
-  deleteTodo: (id:number) => void;
+  deleteTodo: (id: number) => void;
+  editTodo: (newTodo: IToDo) => void;
 }
 
 export const NoteSection = (p: INoteSection) => {
-  const { data, deleteTodo } = p;
+  const { data, deleteTodo, editTodo } = p;
 
   return (
     <ul className={s.note_list}>
       {data.map((todo) => {
-        return <Note 
-        key={todo.id} 
-        value={todo.title} 
-        id={todo.id}
-        deleteTodo={deleteTodo}/>
+        return <Note
+          editTodo={editTodo}
+          key={todo.id}
+          data={todo}
+          deleteTodo={deleteTodo}
+        />
       })}
     </ul>
   )

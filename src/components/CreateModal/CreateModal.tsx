@@ -1,54 +1,56 @@
+import s from './CreateModal.module.scss'
+import { Button } from '../../uiKit/Button/Button'
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import type { IToDo } from '../../types/types';
-import s from './EditModal.module.scss';
-import { createPortal } from 'react-dom';
-import { Button } from '../../uiKit/Button/Button';
 
-interface IEditModal {
-  data: IToDo;
+
+interface ICreateModal {
   closeModal: () => void;
-  editHandler: (todo: IToDo) => void;
+  editHandler: (newTodo: IToDo) => void;
 }
 
-// Получаем Dom-элемент в который будем рендерить модалку
-const modalRoot = document.querySelector('#react-modals')
+const initialState: IToDo = {
+  id: 0,
+  title: '',
+  status: false
+}
 
-export const EditModal = (p: IEditModal) => {
-  const { closeModal, editHandler, data } = p;
-  const [newTitle, setTitle] = useState<IToDo>(data)
-
+export const CreateModal = (p: ICreateModal) => {
+  const { closeModal, editHandler } = p;
+  const [todo, setTodo] = useState<IToDo>(initialState);
 
   // создаем заголовок заметки с помощью инпута
   const changeHangler = (e: ChangeEvent<HTMLInputElement>) => {
 
     const { name, value } = e.target;
-    setTitle({
-      ...newTitle,
+    setTodo({
+      ...todo,
       [name]: value,
     })
   }
 
-  // Сабмитим изменения в заметке
+  // Добавляем новую заметку в стейт с массивом заметок
   const handlerSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { title } = newTitle;
+    const { title } = todo;
 
     if (title.trim()) {
       editHandler({
-        ...newTitle,
-        title
+        ...todo,
+        title,
+        id: Date.now()
       })
       closeModal();
     }
   }
-
+  
   //  Проверяем пустое ли поле инпута через его стейт
-  const isActive = Boolean(newTitle.title.trim())
+  const isActive = Boolean(todo.title.trim())
 
-  return createPortal((
+  return (
     <div className={s.container}>
       <div className={s.modal}>
-        <h2 className={s.modal_title}>Edit Note</h2>
+        <h2 className={s.modal_title}>New Note</h2>
 
         <form
           id='edit-form'
@@ -60,7 +62,7 @@ export const EditModal = (p: IEditModal) => {
             type="text"
             name='title'
             onChange={changeHangler}
-            value={newTitle.title}
+            value={todo.title}
           />
         </form>
 
@@ -80,6 +82,5 @@ export const EditModal = (p: IEditModal) => {
       </div>
 
     </div>
-  ),
-    modalRoot as HTMLDivElement); // указываем куда будем рендерить модалку
-};
+  )
+}

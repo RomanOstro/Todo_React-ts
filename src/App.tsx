@@ -1,14 +1,15 @@
 import { ToDoPage } from './pages/todo/TodoPage'
 import s from './App.module.scss'
-import { EditModal } from './components/EditModal/EditModal'
-import { useState, type ChangeEvent, type FormEvent } from 'react'
+import { CreateModal } from './components/CreateModal/CreateModal'
+import { useState } from 'react'
 import type { IToDo } from './types/types'
 
 export function App() {
-  const [edit, setEdit] = useState<boolean>(false) 
+  const [create, setCreate] = useState<boolean>(false) //стейт открытия модалки для новой заметки
   const [toDoState, setTodoState] = useState<IToDo[]>([])
 
-// функция добавления общей заметки в стейт с заметками - toDoState
+
+  // функция добавления общей заметки в стейт с заметками - toDoState
   const editTodo = (newTodo: IToDo) => {
     setTodoState([
       ...toDoState,
@@ -16,12 +17,9 @@ export function App() {
     ])
   }
 
-  const openEditModal = () => {
-    setEdit(true)
-  }
-
-  const closeEditModal = () => {
-    setEdit(false)
+  // Редактируем заметку
+  const updateTodo = (newTodo: IToDo) => {
+    setTodoState(toDoState.map(todo => todo.id === newTodo.id ? newTodo : todo));
   }
 
   const removeTodo = (id: number) => {
@@ -29,20 +27,29 @@ export function App() {
     setTodoState(newState)
   }
 
+  const openModal = () => {
+    setCreate(true)
+  }
+
+  const closeModal = () => {
+    setCreate(false)
+  }
 
   return (
     <>
       <div className={s.wrapper}>
-        {edit &&
-          <EditModal
+
+        {create &&
+          <CreateModal
             editHandler={editTodo}
-            closeModal={closeEditModal}
-          
+            closeModal={closeModal}
+
           />}
-        <ToDoPage 
-        openEdit={openEditModal} 
-        todoState={toDoState}
-        deleteTodo={removeTodo}
+        <ToDoPage
+          openEdit={openModal}
+          todoState={toDoState}
+          deleteTodo={removeTodo}
+          editTodo={updateTodo}
         />
       </div>
     </>
