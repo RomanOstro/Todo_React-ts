@@ -1,54 +1,38 @@
 import s from './SearchSelect.module.scss'
 import TriangleIcon from "../../assets/svg/triangle-icon.svg?react"
-import { useEffect, useRef, useState } from 'react'
+import { type Ref } from 'react'
+import type { ISelectState } from '../../types/types'
 
-export const SearchSelect = () => {
-  const [isVisible, setIsVisible] = useState<boolean>(false)
-  const [buttonText, setButtonText] = useState<string>('ALL')
-  const dropDownRef = useRef<HTMLDivElement>(null);
+interface ISearchSelect {
+  selectHandler: (value: ISelectState) => void
+  selectRef: Ref<HTMLDivElement> | null;
+  selectVisible: boolean;
+  selectState: ISelectState;
+  closeSelect: () => void;
+}
 
-  const buttonHandler = () => setIsVisible(prev => !prev)
+export const SearchSelect = (p: ISearchSelect) => {
+  const { selectHandler, selectRef, selectVisible, selectState, closeSelect } = p;
 
-  const itemHandler = (value: string) => {
-    setButtonText(value)
-    setIsVisible(false)
-  }
-
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (dropDownRef.current && !dropDownRef.current.contains(e.target as Node)) {
-        setIsVisible(false);
-      }
-    }
-    if (isVisible) {
-      document.addEventListener('mousedown', handleClick);
-    }
-
-    return (() => {
-      document.removeEventListener('mousedown', handleClick);
-    })
-
-  }, [isVisible])
 
   return (
     <div className={s.dropdownWrapper}
-      ref={dropDownRef}
+      ref={selectRef}
     >
 
       <button
         type='button'
-        className={`${s.dropdown__button} ${isVisible && s.dropdown__button_active}`}
-        onClick={buttonHandler}>
-        {buttonText}
+        className={`${s.dropdown__button} ${selectVisible && s.dropdown__button_active}`}
+        onClick={closeSelect}>
+        {selectState}
       </button>
 
-      <ul className={`${s.dropdown__list} ${isVisible && s.dropdown__list_visible}`}>
-        <li className={s['dropdown__list-item']} data-value='all' onClick={() => itemHandler('ALL')}>All</li>
-        <li className={s['dropdown__list-item']} data-value='complete' onClick={() => itemHandler('Complete')}>Complete</li>
-        <li className={s['dropdown__list-item']} data-value='incomplete' onClick={() => itemHandler('Incomplete')}>Incomplete</li>
+      <ul className={`${s.dropdown__list} ${selectVisible && s.dropdown__list_visible}`}>
+        <li className={s['dropdown__list-item']} onClick={() => selectHandler('ALL')}>All</li>
+        <li className={s['dropdown__list-item']} onClick={() => selectHandler('Complete')}>Complete</li>
+        <li className={s['dropdown__list-item']} onClick={() => selectHandler('Incomplete')}>Incomplete</li>
       </ul>
-      {/* <input className={s.input_hidden} type="text" name='select-category' value={buttonText} /> */}
-      <TriangleIcon className={`${s.triangle__icon} ${isVisible && s.triangle__icon_up} `} />
+      <TriangleIcon className={`${s.triangle__icon} ${selectVisible && s.triangle__icon_up} `} />
 
 
     </div>

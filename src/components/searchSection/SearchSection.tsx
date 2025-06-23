@@ -1,20 +1,31 @@
-import type { ChangeEvent } from "react"
+import type { ChangeEvent, Ref } from "react"
 import { SearchInput } from "../../uiKit/SearchInput/SearchInput"
 import { SearchSelect } from "../../uiKit/SearchSelect.tsx/SearchSelect"
 import { ThemeButton } from "../../uiKit/ThemeButton/ThemeButton"
 import s from './SearchSection.module.scss'
+import type { ISelectState } from "../../types/types"
 
 interface ISearchSection {
   searchHandler: (e: ChangeEvent<HTMLInputElement>) => void
+  selectHandler: (value: ISelectState) => void
+  selectRef: Ref<HTMLDivElement> | null;
+  selectVisible: boolean;
+  selectState: ISelectState;
+  closeSelect: () => void;
 }
 
 export const SearchSection = (p: ISearchSection) => {
-  const { searchHandler } = p;
+  const { searchHandler, selectRef, selectHandler, selectVisible, selectState, closeSelect } = p;
 
   return (
     <form className={s.form}>
       <SearchInput searchHandler={searchHandler} />
-      <SearchSelect />
+      <SearchSelect
+        closeSelect={closeSelect}
+        selectState={selectState}
+        selectVisible={selectVisible}
+        selectHandler={selectHandler}
+        selectRef={selectRef} />
       <ThemeButton />
     </form>
   )

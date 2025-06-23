@@ -28,7 +28,6 @@ export const Note = (p: TNote) => {
   // Проверка checked
   const isChecked = data.status;
 
-
   return (
     <>
 
@@ -39,7 +38,7 @@ export const Note = (p: TNote) => {
             type="checkbox"
             className={`${s.note_item_checkbox} ${s.visually_hidden}`}
             onChange={() => checkTodo(data)} />
-          <span></span>
+          <span className={`${isChecked && s.note_item_check}`}></span>
           <span className={`${isChecked && s.checked}`}>{data.title}</span>
         </label>
 

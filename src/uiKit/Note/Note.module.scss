@@ -36,7 +36,7 @@
     cursor: var(--cursor-pointer);
   }
 
-  &_checkbox:checked + span {
+  &_check {
     background-image: url("../../assets/icons/checkbox-icon.svg");
     background-color: var(--button-bg-color);
     background-position: center;
