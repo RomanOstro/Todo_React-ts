@@ -8,8 +8,7 @@ export function App() {
   const [create, setCreate] = useState<boolean>(false) //стейт открытия модалки для новой заметки
   const [toDoState, setTodoState] = useState<IToDo[]>([])
 
-
-  // функция добавления общей заметки в стейт с заметками - toDoState
+  // функция добавления  заметки в стейт с заметками - toDoState
   const editTodo = (newTodo: IToDo) => {
     setTodoState([
       ...toDoState,
@@ -17,11 +16,20 @@ export function App() {
     ])
   }
 
+  // хендлер для чекбокса
+  const checkHandler = (checkTodo: IToDo) => {
+    setTodoState(toDoState.map((todo) => {
+      return todo.id === checkTodo.id ? { ...checkTodo, status: !checkTodo.status } : todo
+    }))
+  }
+
+
   // Редактируем заметку
   const updateTodo = (newTodo: IToDo) => {
     setTodoState(toDoState.map(todo => todo.id === newTodo.id ? newTodo : todo));
   }
 
+  // Удалить заметку
   const removeTodo = (id: number) => {
     const newState = toDoState.filter(todo => todo.id !== id);
     setTodoState(newState)
@@ -50,6 +58,7 @@ export function App() {
           todoState={toDoState}
           deleteTodo={removeTodo}
           editTodo={updateTodo}
+          checkTodo={checkHandler}
         />
       </div>
     </>

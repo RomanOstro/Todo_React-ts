@@ -47,11 +47,6 @@
     outline: 1px solid var(--accent-color);
   }
 
-  &_checkbox:checked + span + .note_item_text {
-    text-decoration: line-through;
-    opacity: 0.5;
-  }
-
   &_controls {
     display: flex;
     column-gap: 10px;
@@ -71,6 +66,11 @@
   color: var(--icon-controls-color);
 
   &:hover {
-    color: #E50000;
+    color: #e50000;
   }
+}
+
+.checked {
+  text-decoration: line-through;
+  opacity: 0.5;
 }

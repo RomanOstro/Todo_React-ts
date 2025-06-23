@@ -10,9 +10,11 @@ interface TNote {
   data: IToDo;
   deleteTodo: (id: number) => void;
   editTodo: (newTodo: IToDo) => void;
+  checkTodo: (newTodo: IToDo) => void;
 }
 
-export const Note = ({ data, deleteTodo, editTodo }: TNote) => {
+export const Note = (p: TNote) => {
+  const { data, deleteTodo, editTodo, checkTodo } = p;
   const [edit, setEdit] = useState<boolean>(false) // стейт модалка - редактирование заметки
 
   const closeEditModal = () => {
@@ -23,6 +25,10 @@ export const Note = ({ data, deleteTodo, editTodo }: TNote) => {
     setEdit(true)
   }
 
+  // Проверка checked
+  const isChecked = data.status;
+
+
   return (
     <>
 
@@ -31,9 +37,10 @@ export const Note = ({ data, deleteTodo, editTodo }: TNote) => {
         <label className={s.note_item_label}>
           <input
             type="checkbox"
-            className={`${s.note_item_checkbox} ${s.visually_hidden}`} />
+            className={`${s.note_item_checkbox} ${s.visually_hidden}`}
+            onChange={() => checkTodo(data)} />
           <span></span>
-          <span className={s.note_item_text}>{data.title}</span>
+          <span className={`${isChecked && s.checked}`}>{data.title}</span>
         </label>
 
         <div className={s.note_item_controls}>
