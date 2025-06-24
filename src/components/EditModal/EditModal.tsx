@@ -17,7 +17,6 @@ export const EditModal = (p: IEditModal) => {
   const { closeModal, editHandler, data } = p;
   const [newTitle, setTitle] = useState<IToDo>(data)
 
-
   // создаем заголовок заметки с помощью инпута
   const changeHangler = (e: ChangeEvent<HTMLInputElement>) => {
 

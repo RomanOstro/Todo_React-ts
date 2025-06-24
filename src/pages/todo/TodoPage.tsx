@@ -18,7 +18,7 @@ export function ToDoPage(p: IToDoPage) {
   const [search, setSearch] = useState<string>('') // Стейт инпута search
   const [selectVisible, setSelectVisible] = useState<boolean>(false) //состояние открытия дропдауна
   const [selectState, setSelectState] = useState<ISelectState>('ALL') // стейт селекта
-  const dropDownRef = useRef<HTMLDivElement>(null); //реф селекта - для реализации закрытия окна
+  const dropDownRef = useRef<HTMLDivElement>(null); //реф селекта - для реализации закрытия окна по клику вне дропдауна
 
 
   let renderData;

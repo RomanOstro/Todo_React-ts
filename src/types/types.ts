@@ -5,3 +5,10 @@ export interface IToDo {
 }
 
 export type ISelectState = 'ALL'|'Complete'|'Incomplete';
+
+export type ITheme = 'light' | 'dark';
+
+export interface IThemeContext{
+  theme: ITheme;
+  changeTheme: ()=> void;
+}

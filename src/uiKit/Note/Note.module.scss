@@ -50,6 +50,14 @@
   &_controls {
     display: flex;
     column-gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  &:hover .note_item_controls {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 

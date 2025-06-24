@@ -1,13 +1,24 @@
 :root {
+  --accent-color: #6c63ff;
+  --button-color: #f7f7f7;
+  --button-bg-color: #6c63ff;
+  --dropdown-hover-color: #dbd9f9;
+  --button-hover-color: #534cc2;
+  --border-color: #6c63ff;
+  --icon-controls-color: #cdcdcd;
+
+  //переменные тем
   --bg-color: #f7f7f7;
   --main-color: #252525;
-  --accent-color: #6C63FF;
-  --button-color: #F7F7F7;
-  --button-bg-color: #6C63FF;
-  --dropdown-hover-color: #DBD9F9;
-  --button-hover-color: #534CC2;
-  --border-color: #6C63FF;
-  --icon-controls-color: #CDCDCD;
-  --cursor-pointer: url('./assets/icons/cursor-icon-black.png'), pointer;
+  --theme-border-color: #6c63ff;
+  --modal-leyaut-bg-color: #252525;
+  --cursor-pointer: url("./assets/icons/cursor-icon-black.png"), pointer;
+}
 
+#dark {
+  --bg-color: #252525;
+  --main-color: #f7f7f7;
+  --theme-border-color: #f7f7f7;
+  --modal-leyaut-bg-color: #252525;
+  --cursor-pointer: url("./assets/icons/cursor-icon-white.png"), pointer;
 }

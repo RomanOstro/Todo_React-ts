@@ -1,14 +1,14 @@
 .searchInput {
-   position: relative;
-   width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .input {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 16px;
   background-color: transparent;
-  border: 1px solid var(--accent-color);
+  border: 1px solid var(--theme-border-color);
   border-radius: 5px;
   padding: 11px 16px;
   padding-right: 43px;
@@ -16,7 +16,7 @@
   outline: none;
 
   &::placeholder {
-    color: #C3C1E5;
+    color: #c3c1e5;
   }
 
   &:focus {
@@ -24,12 +24,12 @@
   }
 }
 
-  .searchIcon{
-    position: absolute;
-    fill: var(--accent-color);
-    width: 24px;
-    height: 24px;
-    top: 10px;
-    right: 16px;
-    pointer-events: none;
-  }
+.searchIcon {
+  position: absolute;
+  fill: var(--theme-border-color);
+  width: 24px;
+  height: 24px;
+  top: 10px;
+  right: 16px;
+  pointer-events: none;
+}
