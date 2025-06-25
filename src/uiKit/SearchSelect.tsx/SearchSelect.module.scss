@@ -69,10 +69,6 @@
   }
 }
 
-.input_hidden {
-  // display: none;
-}
-
 .triangle__icon {
   position: absolute;
   stroke: #f7f7f7;
@@ -84,5 +80,5 @@
 }
 
 .triangle__icon_up {
-    transform: rotate(180deg);
-  }
+  transform: rotate(180deg);
+}

@@ -14,8 +14,8 @@ interface IToDoPage {
   checkTodo: (newTodo: IToDo) => void;
 }
 
-export function ToDoPage(p: IToDoPage) {
-  const { openEdit, todoState, deleteTodo, editTodo, checkTodo } = p;
+export function ToDoPage(props: IToDoPage) {
+  const { openEdit, todoState, deleteTodo, editTodo, checkTodo } = props;
   const [search, setSearch] = useState<string>('') // Стейт инпута search
   const [selectVisible, setSelectVisible] = useState<boolean>(false) //состояние открытия дропдауна
   const [selectState, setSelectState] = useState<ISelectState>('ALL') // стейт селекта

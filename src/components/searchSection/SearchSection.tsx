@@ -14,8 +14,8 @@ interface ISearchSection {
   closeSelect: () => void;
 }
 
-export const SearchSection = (p: ISearchSection) => {
-  const { searchHandler, selectRef, selectHandler, selectVisible, selectState, closeSelect } = p;
+export const SearchSection = (props: ISearchSection) => {
+  const { searchHandler, selectRef, selectHandler, selectVisible, selectState, closeSelect } = props;
 
   return (
     <form className={s.form}>

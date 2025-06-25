@@ -18,12 +18,21 @@ export const useOutsideClick = ({
         setVisible(false);
       }
     };
+
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setVisible(false);
+      }
+    };
+
     if (visible) {
       document.addEventListener("mousedown", handleClick);
+      document.addEventListener("keydown", handleEsc);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleEsc);
     };
-  }, [visible]);
+  }, [visible, ref, setVisible]);
 };

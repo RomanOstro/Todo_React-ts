@@ -14,8 +14,8 @@ interface TNote {
   checkTodo: (newTodo: IToDo) => void;
 }
 
-export const Note = (p: TNote) => {
-  const { data, deleteTodo, editTodo, checkTodo } = p;
+export const Note = (props: TNote) => {
+  const { data, deleteTodo, editTodo, checkTodo } = props;
   const [edit, setEdit] = useState<boolean>(false) // стейт модалка - редактирование заметки
   const modalRef = useRef<HTMLDivElement | null>(null)
   

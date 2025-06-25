@@ -1,14 +1,14 @@
 export interface IToDo {
   title: string;
   id: number;
-  status: boolean
+  status: boolean;
 }
 
-export type ISelectState = 'ALL'|'Complete'|'Incomplete';
+export type ISelectState = "ALL" | "Complete" | "Incomplete";
 
-export type ITheme = 'light' | 'dark';
+export type ITheme = "light" | "dark";
 
-export interface IThemeContext{
+export interface IThemeContext {
   theme: ITheme;
-  changeTheme: ()=> void;
+  changeTheme: () => void;
 }

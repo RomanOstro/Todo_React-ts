@@ -11,8 +11,8 @@ interface ISearchSelect {
   closeSelect: () => void;
 }
 
-export const SearchSelect = (p: ISearchSelect) => {
-  const { selectHandler, selectRef, selectVisible, selectState, closeSelect } = p;
+export const SearchSelect = (props: ISearchSelect) => {
+  const { selectHandler, selectRef, selectVisible, selectState, closeSelect } = props;
 
 
   return (

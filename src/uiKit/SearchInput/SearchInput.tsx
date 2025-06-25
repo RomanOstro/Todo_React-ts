@@ -6,9 +6,9 @@ interface ISearchInput {
   searchHandler: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const SearchInput = (p: ISearchInput) => {
+export const SearchInput = (props: ISearchInput) => {
 
-  const { searchHandler } = p;
+  const { searchHandler } = props;
 
 
   return (

@@ -1,43 +1,30 @@
 import { ToDoPage } from './pages/todo/TodoPage'
 import s from './App.module.scss'
 import { CreateModal } from './components/CreateModal/CreateModal'
-import { useEffect, useRef, useState } from 'react'
-import type { ITheme, IToDo } from './types/types'
+import { useRef, useState } from 'react'
+import type { IToDo } from './types/types'
 import { ThemeContext } from './scripts/themeContext'
 import { useOutsideClick } from './hooks/useOutsideClick'
+import { useSetTheme } from './hooks/useSetTheme'
 export { ThemeContext }
 
 
 
 export function App() {
-  const [theme, setTheme] = useState<ITheme>(() => { // стейт смены темы
-    const mode = localStorage.getItem('mode')
-    return mode ? JSON.parse(mode) : "light"
-  })
+
   const [createModalIsOpen, setCreateModalIsOpen] = useState<boolean>(false) //стейт открытия модалки для новой заметки
   const createModalRef = useRef<HTMLDivElement | null>(null)
   const [toDoState, setTodoState] = useState<IToDo[]>([]) // стейт для заметок
 
-  // Закрываем модалку - клик вне модалки
+  // [хук: Закрываем модалку - клик вне модалки]
   useOutsideClick({
     ref: createModalRef,
     visible: createModalIsOpen,
     setVisible: setCreateModalIsOpen
-  })
+  });
 
-  //присваиваем id для боди
-  useEffect(() => {
-    document.body.id = theme;
-  }, [theme])
-
-  // хендлер смены темы (передается через контекст)
-  const changeTheme = () => {
-    setTheme(prev => {
-      const newPrev = prev === "light" ? "dark" : "light"
-      localStorage.setItem('mode', JSON.stringify(newPrev))
-      return newPrev
-    })
-  }
+  // [хук: смены темы]
+  const [theme, changeTheme] = useSetTheme();
 
   // функция добавления  заметки в стейт с заметками - toDoState
   const editTodo = (newTodo: IToDo) => {
