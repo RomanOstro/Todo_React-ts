@@ -2,8 +2,9 @@ import s from './Note.module.scss'
 import EditIcon from '../../assets/svg/edit-icon.svg?react'
 import RemoveIcon from '../../assets/svg/remove-icon.svg?react'
 import { EditModal } from '../../components/EditModal/EditModal';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { IToDo } from '../../types/types';
+import { useOutsideClick } from '../../hooks/useOutsideClick';
 
 
 interface TNote {
@@ -16,7 +17,14 @@ interface TNote {
 export const Note = (p: TNote) => {
   const { data, deleteTodo, editTodo, checkTodo } = p;
   const [edit, setEdit] = useState<boolean>(false) // стейт модалка - редактирование заметки
-
+  const modalRef = useRef<HTMLDivElement | null>(null)
+  
+  useOutsideClick({
+    ref: modalRef,
+    visible: edit,
+    setVisible: setEdit
+  })
+  
   const closeEditModal = () => {
     setEdit(false)
   }
@@ -48,6 +56,7 @@ export const Note = (p: TNote) => {
         </div>
         {edit &&
           <EditModal
+            ref={modalRef}
             data={data}
             closeModal={closeEditModal}
             editHandler={editTodo} />}

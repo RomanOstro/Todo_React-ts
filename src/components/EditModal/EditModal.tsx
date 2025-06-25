@@ -1,20 +1,21 @@
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
 import type { IToDo } from '../../types/types';
 import s from './EditModal.module.scss';
 import { createPortal } from 'react-dom';
-import { Button } from '../../uiKit/Button/Button';
+import { Button } from '../UI-kit/Button/Button';
 
 interface IEditModal {
   data: IToDo;
   closeModal: () => void;
   editHandler: (todo: IToDo) => void;
+  ref: Ref<HTMLDivElement | null>
 }
 
 // Получаем Dom-элемент в который будем рендерить модалку
 const modalRoot = document.querySelector('#react-modals')
 
-export const EditModal = (p: IEditModal) => {
-  const { closeModal, editHandler, data } = p;
+export const EditModal = (props: IEditModal) => {
+  const { closeModal, editHandler, data, ref } = props;
   const [newTitle, setTitle] = useState<IToDo>(data)
 
   // создаем заголовок заметки с помощью инпута
@@ -46,7 +47,7 @@ export const EditModal = (p: IEditModal) => {
 
   return createPortal((
     <div className={s.container}>
-      <div className={s.modal}>
+      <div ref={ref} className={s.modal}>
         <h2 className={s.modal_title}>Edit Note</h2>
 
         <form

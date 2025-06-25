@@ -1,12 +1,13 @@
 import s from './CreateModal.module.scss'
-import { Button } from '../../uiKit/Button/Button'
-import { useState, type ChangeEvent, type FormEvent } from 'react';
+import { Button } from '../UI-kit/Button/Button'
+import { useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
 import type { IToDo } from '../../types/types';
 
 
 interface ICreateModal {
   closeModal: () => void;
   editHandler: (newTodo: IToDo) => void;
+  ref: Ref<HTMLDivElement | null>
 }
 
 const initialState: IToDo = {
@@ -15,8 +16,8 @@ const initialState: IToDo = {
   status: false
 }
 
-export const CreateModal = (p: ICreateModal) => {
-  const { closeModal, editHandler } = p;
+export const CreateModal = (props: ICreateModal) => {
+  const { closeModal, editHandler, ref } = props;
   const [todo, setTodo] = useState<IToDo>(initialState);
 
   // создаем заголовок заметки с помощью инпута
@@ -43,13 +44,15 @@ export const CreateModal = (p: ICreateModal) => {
       closeModal();
     }
   }
-  
+
   //  Проверяем пустое ли поле инпута через его стейт
   const isActive = Boolean(todo.title.trim())
 
   return (
     <div className={s.container}>
-      <div className={s.modal}>
+      <div className={s.modal}
+        ref={ref}
+      >
         <h2 className={s.modal_title}>New Note</h2>
 
         <form

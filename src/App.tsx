@@ -1,9 +1,10 @@
 import { ToDoPage } from './pages/todo/TodoPage'
 import s from './App.module.scss'
 import { CreateModal } from './components/CreateModal/CreateModal'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { ITheme, IToDo } from './types/types'
 import { ThemeContext } from './scripts/themeContext'
+import { useOutsideClick } from './hooks/useOutsideClick'
 export { ThemeContext }
 
 
@@ -13,8 +14,16 @@ export function App() {
     const mode = localStorage.getItem('mode')
     return mode ? JSON.parse(mode) : "light"
   })
-  const [create, setCreate] = useState<boolean>(false) //стейт открытия модалки для новой заметки
+  const [createModalIsOpen, setCreateModalIsOpen] = useState<boolean>(false) //стейт открытия модалки для новой заметки
+  const createModalRef = useRef<HTMLDivElement | null>(null)
   const [toDoState, setTodoState] = useState<IToDo[]>([]) // стейт для заметок
+
+  // Закрываем модалку - клик вне модалки
+  useOutsideClick({
+    ref: createModalRef,
+    visible: createModalIsOpen,
+    setVisible: setCreateModalIsOpen
+  })
 
   //присваиваем id для боди
   useEffect(() => {
@@ -57,19 +66,20 @@ export function App() {
   }
 
   const openModal = () => {
-    setCreate(true)
+    setCreateModalIsOpen(true)
   }
 
   const closeModal = () => {
-    setCreate(false)
+    setCreateModalIsOpen(false)
   }
 
   return (
     <>
       <div className={s.wrapper}>
 
-        {create &&
+        {createModalIsOpen &&
           <CreateModal
+            ref={createModalRef}
             editHandler={editTodo}
             closeModal={closeModal}
 
