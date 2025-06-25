@@ -10,6 +10,7 @@ export const ThemeButton = () => {
   if (!context) return;
 
   const { theme, changeTheme } = context;
+
   const isActive = theme === 'light';
 
   return (

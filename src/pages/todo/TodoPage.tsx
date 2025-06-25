@@ -1,10 +1,11 @@
 import s from './todo.module.scss'
 import { SearchSection } from '../../components/searchSection/SearchSection'
 import { NoteSection } from '../../components/NoteSection/NoteSection'
-import { EditButton } from '../../components/UI-kit/EditButton/EditButton'
+import { EditButton } from '../../components/UI/EditButton/EditButton'
 import type { ISelectState, IToDo } from '../../types/types'
 import { useRef, useState, type ChangeEvent } from 'react'
 import { useOutsideClick } from '../../hooks/useOutsideClick'
+import { Loader } from '../../components/Loader/Loader'
 
 interface IToDoPage {
   openEdit: () => void;
@@ -72,14 +73,17 @@ export function ToDoPage(props: IToDoPage) {
         selectRef={dropDownRef}
 
       />
-      <NoteSection
-        renderData={renderData}
-        data={todoState}
-        searchValue={search}
-        checkTodo={checkTodo}
-        editTodo={editTodo}
-        deleteTodo={deleteTodo}
-      />
+      {todoState.length ?
+        <NoteSection
+          renderData={renderData}
+          data={todoState}
+          searchValue={search}
+          checkTodo={checkTodo}
+          editTodo={editTodo}
+          deleteTodo={deleteTodo}
+        /> :
+        <Loader value={'Empty...'} />}
+
       <EditButton onClick={openEdit} />
     </main>
   )

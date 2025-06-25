@@ -1,7 +1,7 @@
 import s from './Note.module.scss'
 import EditIcon from '../../assets/svg/edit-icon.svg?react'
 import RemoveIcon from '../../assets/svg/remove-icon.svg?react'
-import { EditModal } from '../../components/EditModal/EditModal';
+import { EditModal } from '../EditModal/EditModal';
 import { useRef, useState } from 'react';
 import type { IToDo } from '../../types/types';
 import { useOutsideClick } from '../../hooks/useOutsideClick';

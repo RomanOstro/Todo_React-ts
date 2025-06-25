@@ -1,5 +1,5 @@
 import s from './CreateModal.module.scss'
-import { Button } from '../UI-kit/Button/Button'
+import { Button } from '../UI/Button/Button'
 import { useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
 import type { IToDo } from '../../types/types';
 

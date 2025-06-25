@@ -1,5 +1,5 @@
 import s from './NoteSection.module.scss'
-import { Note } from '../../uiKit/Note/Note'
+import { Note } from '../Note/Note'
 import type { IToDo } from '../../types/types'
 
 interface INoteSection {

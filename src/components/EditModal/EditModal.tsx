@@ -2,7 +2,7 @@ import { useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
 import type { IToDo } from '../../types/types';
 import s from './EditModal.module.scss';
 import { createPortal } from 'react-dom';
-import { Button } from '../UI-kit/Button/Button';
+import { Button } from '../UI/Button/Button';
 
 interface IEditModal {
   data: IToDo;

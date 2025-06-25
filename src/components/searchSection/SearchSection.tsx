@@ -1,7 +1,7 @@
 import type { ChangeEvent, Ref } from "react"
-import { SearchInput } from "../../uiKit/SearchInput/SearchInput"
-import { SearchSelect } from "../../uiKit/SearchSelect.tsx/SearchSelect"
-import { ThemeButton } from "../../uiKit/ThemeButton/ThemeButton"
+import { SearchInput } from "../SearchInput/SearchInput"
+import { SearchSelect } from "../SearchSelect.tsx/SearchSelect"
+import { ThemeButton } from "../ThemeButton/ThemeButton"
 import s from './SearchSection.module.scss'
 import type { ISelectState } from "../../types/types"
 

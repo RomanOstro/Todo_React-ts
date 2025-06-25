@@ -18,7 +18,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 500px;
+  max-width: clamp(22.188rem, 13.822rem + 37.18vw, 31.25rem);
   background-color: var(--bg-color);
   border: 1px solid var(--theme-border-color);
   border-radius: 16px;
@@ -33,7 +33,7 @@
   &_button_section {
     display: flex;
     justify-content: space-between;
-    gap: 226px;
+    gap: clamp(1.875rem, -9.433rem + 50.26vw, 14.125rem);
   }
 }
 

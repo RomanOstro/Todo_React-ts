@@ -1,0 +1,12 @@
+.loader {
+  display: block;
+  align-self: center;
+  min-width: 220px;
+  min-height: 124px;
+}
+
+
+
+.loader + p {
+  padding-block-start: 20px;
+}
