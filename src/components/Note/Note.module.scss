@@ -59,6 +59,9 @@
     opacity: 1;
     pointer-events: auto;
   }
+  &_checkbox:hover + span {
+    box-shadow: 0 0 2px rgba(108, 99, 255, 0.7);
+  }
 }
 
 .edit_icon {

@@ -3,10 +3,8 @@ import s from './App.module.scss'
 import { CreateModal } from './components/CreateModal/CreateModal'
 import { useRef, useState } from 'react'
 import type { IToDo } from './types/types'
-import { ThemeContext } from './scripts/themeContext'
 import { useOutsideClick } from './hooks/useOutsideClick'
-import { useSetTheme } from './hooks/useSetTheme'
-export { ThemeContext }
+import { ThemeProvider } from './providers/theme-provider';
 
 
 
@@ -22,9 +20,6 @@ export function App() {
     visible: createModalIsOpen,
     setVisible: setCreateModalIsOpen
   });
-
-  // [хук: смены темы]
-  const [theme, changeTheme] = useSetTheme();
 
   // функция добавления  заметки в стейт с заметками - toDoState
   const editTodo = (newTodo: IToDo) => {
@@ -71,7 +66,7 @@ export function App() {
             closeModal={closeModal}
 
           />}
-        <ThemeContext value={{ changeTheme, theme }}>
+        <ThemeProvider>
           <ToDoPage
             openEdit={openModal}
             todoState={toDoState}
@@ -79,7 +74,7 @@ export function App() {
             editTodo={updateTodo}
             checkTodo={checkHandler}
           />
-        </ThemeContext>
+        </ThemeProvider>
       </div>
     </>
   )

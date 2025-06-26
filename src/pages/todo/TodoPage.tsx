@@ -5,7 +5,7 @@ import { EditButton } from '../../components/UI/EditButton/EditButton'
 import type { ISelectState, IToDo } from '../../types/types'
 import { useRef, useState, type ChangeEvent } from 'react'
 import { useOutsideClick } from '../../hooks/useOutsideClick'
-import { Loader } from '../../components/Loader/Loader'
+import { Loader } from '../../components/UI/Loader/Loader'
 
 interface IToDoPage {
   openEdit: () => void;

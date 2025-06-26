@@ -1,17 +1,13 @@
-import { useContext } from 'react';
-import IconDay from '../../assets/icons/day.svg?react'
-import IconNight from '../../assets/icons/night.svg?react'
+import IconDay from '../../../assets/icons/day.svg?react'
+import IconNight from '../../../assets/icons/night.svg?react'
+import { useTheme } from '../../../providers/theme-provider'
 import s from './ThemeButton.module.scss'
-import { ThemeContext } from '../../App';
 
 
 export const ThemeButton = () => {
-  const context = useContext(ThemeContext)
-  if (!context) return;
+  const { theme, changeTheme } = useTheme();
 
-  const { theme, changeTheme } = context;
-
-  const isActive = theme === 'light';
+  const isActive = theme === "light"
 
   return (
     <>
