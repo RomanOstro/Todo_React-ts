@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
 import type { IToDo } from '../../types/types';
 import s from './EditModal.module.scss';
 import { createPortal } from 'react-dom';
@@ -17,6 +17,14 @@ const modalRoot = document.querySelector('#react-modals')
 export const EditModal = (props: IEditModal) => {
   const { closeModal, editHandler, data, ref } = props;
   const [newTitle, setTitle] = useState<IToDo>(data)
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [ref])
 
   // создаем заголовок заметки с помощью инпута
   const changeHangler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +64,7 @@ export const EditModal = (props: IEditModal) => {
           onSubmit={handlerSubmit}
         >
           <input
+            ref={inputRef}
             className={s.edit__form_input}
             type="text"
             name='title'

@@ -1,6 +1,6 @@
 import s from './CreateModal.module.scss'
 import { Button } from '../UI/Button/Button'
-import { useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
 import type { IToDo } from '../../types/types';
 
 
@@ -19,6 +19,15 @@ const initialState: IToDo = {
 export const CreateModal = (props: ICreateModal) => {
   const { closeModal, editHandler, ref } = props;
   const [todo, setTodo] = useState<IToDo>(initialState);
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [ref])
+
 
   // создаем заголовок заметки с помощью инпута
   const changeHangler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +57,7 @@ export const CreateModal = (props: ICreateModal) => {
   //  Проверяем пустое ли поле инпута через его стейт
   const isActive = Boolean(todo.title.trim())
 
+  console.log(inputRef)
   return (
     <div className={s.container}>
       <div className={s.modal}
@@ -61,6 +71,7 @@ export const CreateModal = (props: ICreateModal) => {
           onSubmit={handlerSubmit}
         >
           <input
+            ref={inputRef}
             className={s.edit__form_input}
             type="text"
             name='title'
