@@ -57,7 +57,6 @@ export const CreateModal = (props: ICreateModal) => {
   //  Проверяем пустое ли поле инпута через его стейт
   const isActive = Boolean(todo.title.trim())
 
-  console.log(inputRef)
   return (
     <div className={s.container}>
       <div className={s.modal}

@@ -5,8 +5,7 @@
   min-height: 124px;
 }
 
-
-
 .loader + p {
   padding-block-start: 20px;
+  pointer-events: none;
 }

@@ -14,6 +14,7 @@ interface INoteSection {
 export const NoteSection = (props: INoteSection) => {
   const { data, deleteTodo, editTodo, checkTodo, renderData } = props;
 
+
   return (
     <ul className={s.note_list}>
 
