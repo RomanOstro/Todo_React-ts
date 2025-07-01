@@ -4,15 +4,12 @@ import type { IToDo } from '../../types/types'
 
 interface INoteSection {
   data: IToDo[];
-  deleteTodo: (id: number) => void;
-  editTodo: (newTodo: IToDo) => void;
-  checkTodo: (newTodo: IToDo) => void;
   searchValue: string;
   renderData: IToDo[]
 }
 
 export const NoteSection = (props: INoteSection) => {
-  const { data, deleteTodo, editTodo, checkTodo, renderData } = props;
+  const { data, renderData } = props;
 
 
   return (
@@ -20,11 +17,8 @@ export const NoteSection = (props: INoteSection) => {
 
       {(renderData ? renderData : data).map((todo) => {
         return <Note
-          editTodo={editTodo}
           key={todo.id}
           data={todo}
-          deleteTodo={deleteTodo}
-          checkTodo={checkTodo}
         />
       })}
 

@@ -2,26 +2,25 @@ import s from './todo.module.scss'
 import { SearchSection } from '../../components/searchSection/SearchSection'
 import { NoteSection } from '../../components/NoteSection/NoteSection'
 import { EditButton } from '../../components/UI/EditButton/EditButton'
-import type { ISelectState, IToDo } from '../../types/types'
+import type { ISelectState } from '../../types/types'
 import { useRef, useState, type ChangeEvent } from 'react'
 import { useOutsideClick } from '../../hooks/useOutsideClick'
 import { Loader } from '../../components/UI/Loader/Loader'
+import { useSelector } from '../../services/store/store'
+import { getTodosSelector } from '../../services/slices/todoSlice'
+
 
 interface IToDoPage {
   openEdit: () => void;
-  todoState: IToDo[];
-  deleteTodo: (id: number) => void;
-  editTodo: (newTodo: IToDo) => void;
-  checkTodo: (newTodo: IToDo) => void;
 }
 
 export function ToDoPage(props: IToDoPage) {
-  const { openEdit, todoState, deleteTodo, editTodo, checkTodo } = props;
+  const { openEdit } = props;
   const [search, setSearch] = useState<string>('') // Стейт инпута search
   const [selectVisible, setSelectVisible] = useState<boolean>(false) //состояние открытия дропдауна
   const [selectState, setSelectState] = useState<ISelectState>('ALL') // стейт селекта
   const dropDownRef = useRef<HTMLDivElement | null>(null); //реф селекта - для реализации закрытия окна по клику вне дропдауна
-
+  const todoState = useSelector(getTodosSelector)
   // кастомный хук закрытия, окна по клику Вне
   useOutsideClick({
     ref: dropDownRef,
@@ -78,9 +77,6 @@ export function ToDoPage(props: IToDoPage) {
           renderData={renderData}
           data={todoState}
           searchValue={search}
-          checkTodo={checkTodo}
-          editTodo={editTodo}
-          deleteTodo={deleteTodo}
         /> :
         <Loader value={'Empty...'} />}
 

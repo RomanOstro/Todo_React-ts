@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './assets/styles/variables.scss'
 import './assets/styles/index.scss'
 import { App } from './App.tsx'
-import { store } from './services/store.ts'
+import { store } from './services/store/store.ts'
 import { Provider } from 'react-redux'
 
 

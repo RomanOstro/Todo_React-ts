@@ -3,11 +3,12 @@ import type { IToDo } from '../../types/types';
 import s from './EditModal.module.scss';
 import { createPortal } from 'react-dom';
 import { Button } from '../UI/Button/Button';
+import { useDispatch } from '../../services/store/store';
+import { updateTodo } from '../../services/slices/todoSlice';
 
 interface IEditModal {
   data: IToDo;
   closeModal: () => void;
-  editHandler: (todo: IToDo) => void;
   ref: Ref<HTMLDivElement | null>
 }
 
@@ -15,10 +16,12 @@ interface IEditModal {
 const modalRoot = document.querySelector('#react-modals')
 
 export const EditModal = (props: IEditModal) => {
-  const { closeModal, editHandler, data, ref } = props;
+  const dispatch = useDispatch()
+  const { closeModal, data, ref } = props;
   const [newTitle, setTitle] = useState<IToDo>(data)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
+
 
   useEffect(() => {
     if (inputRef.current) {
@@ -42,10 +45,14 @@ export const EditModal = (props: IEditModal) => {
     const { title } = newTitle;
 
     if (title.trim()) {
-      editHandler({
+      dispatch(updateTodo({
         ...newTitle,
         title
-      })
+      }))
+      // editHandler({
+      //   ...newTitle,
+      //   title
+      // })
       closeModal();
     }
   }

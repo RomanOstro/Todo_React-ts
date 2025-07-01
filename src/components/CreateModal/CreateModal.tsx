@@ -2,11 +2,12 @@ import s from './CreateModal.module.scss'
 import { Button } from '../UI/Button/Button'
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent, type Ref } from 'react';
 import type { IToDo } from '../../types/types';
+import { useDispatch } from '../../services/store/store';
+import { addTodo } from '../../services/slices/todoSlice';
 
 
 interface ICreateModal {
   closeModal: () => void;
-  editHandler: (newTodo: IToDo) => void;
   ref: Ref<HTMLDivElement | null>
 }
 
@@ -17,7 +18,9 @@ const initialState: IToDo = {
 }
 
 export const CreateModal = (props: ICreateModal) => {
-  const { closeModal, editHandler, ref } = props;
+  const dispatch = useDispatch();
+
+  const { closeModal, ref } = props;
   const [todo, setTodo] = useState<IToDo>(initialState);
 
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -45,11 +48,10 @@ export const CreateModal = (props: ICreateModal) => {
     const { title } = todo;
 
     if (title.trim()) {
-      editHandler({
+      dispatch(addTodo({
         ...todo,
         title,
-        id: Date.now()
-      })
+      }))
       closeModal();
     }
   }

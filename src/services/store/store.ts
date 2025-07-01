@@ -1,11 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineSlices } from "@reduxjs/toolkit";
 import {
   useDispatch as dispatchHook,
   useSelector as selectorHook,
 } from "react-redux";
+import { toDoSlice } from "../slices/todoSlice";
+
+const rootReducer = combineSlices(toDoSlice);
 
 export const store = configureStore({
-  reducer: {},
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;

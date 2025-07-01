@@ -5,19 +5,28 @@ import { EditModal } from '../EditModal/EditModal';
 import { useRef, useState } from 'react';
 import type { IToDo } from '../../types/types';
 import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useDispatch } from '../../services/store/store';
+import { removeTodo, checkTodo } from '../../services/slices/todoSlice';
 
 
-interface TNote {
+interface TNoteProps {
   data: IToDo;
-  deleteTodo: (id: number) => void;
-  editTodo: (newTodo: IToDo) => void;
-  checkTodo: (newTodo: IToDo) => void;
 }
 
-export const Note = (props: TNote) => {
-  const { data, deleteTodo, editTodo, checkTodo } = props;
+export const Note = (props: TNoteProps) => {
+  const { data } = props;
   const [edit, setEdit] = useState<boolean>(false) // стейт модалка - редактирование заметки
   const modalRef = useRef<HTMLDivElement | null>(null)
+  const dispatch = useDispatch();
+
+
+  const handleRemove = (id: number) => {
+    dispatch(removeTodo(id))
+  }
+
+  const handleCheck = (id: number) => {
+    dispatch(checkTodo(id))
+  }
 
   useOutsideClick({
     ref: modalRef,
@@ -45,21 +54,21 @@ export const Note = (props: TNote) => {
           <input
             type="checkbox"
             className={`${s.note_item_checkbox} ${s.visually_hidden}`}
-            onChange={() => checkTodo(data)} />
+            onChange={() => handleCheck(data.id)} />
           <span className={`${isChecked && s.note_item_check}`}></span>
           <span className={`${isChecked && s.checked}`}>{data.title}</span>
         </label>
 
         <div className={s.note_item_controls}>
           <EditIcon className={s.edit_icon} onClick={oOpenEditModal} />
-          <RemoveIcon className={s.remove_icon} onClick={() => deleteTodo(data.id)} />
+          <RemoveIcon className={s.remove_icon} onClick={() => handleRemove(data.id)} />
         </div>
         {edit &&
           <EditModal
             ref={modalRef}
             data={data}
             closeModal={closeEditModal}
-            editHandler={editTodo} />}
+          />}
       </li>
     </>
 
